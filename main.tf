@@ -16,8 +16,7 @@ data "aws_ssm_parameter" "this" {
 # Instance
 ################################################################################
 
-#tfsec:ignore:aws-ec2-enable-at-rest-encryption
-resource "aws_instance" "this" {
+resource "aws_instance" "this" { #tfsec:ignore:aws-ec2-enable-at-rest-encryption
   count = local.create && !var.create_spot_instance ? 1 : 0
 
   ami                  = try(coalesce(var.ami, data.aws_ssm_parameter.this[0].value), null)
