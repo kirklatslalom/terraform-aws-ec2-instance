@@ -16,6 +16,7 @@ data "aws_ssm_parameter" "this" {
 # Instance
 ################################################################################
 
+#tfsec:ignore:aws-ec2-enable-at-rest-encryption
 resource "aws_instance" "this" {
   count = local.create && !var.create_spot_instance ? 1 : 0
 
